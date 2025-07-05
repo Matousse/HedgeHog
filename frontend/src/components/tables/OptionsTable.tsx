@@ -18,10 +18,12 @@ export interface Option {
 
 interface OptionsTableProps {
   options: Option[];
-  title: string;
-  emptyMessage: string;
+  title?: string;
+  emptyMessage?: string;
   onBuy?: (id: string) => void;
   onClaim?: (id: string) => void;
+  showBuyButton?: boolean;
+  showClaimButton?: boolean;
 }
 
 const OptionsTable: React.FC<OptionsTableProps> = ({

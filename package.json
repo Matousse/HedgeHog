@@ -1,0 +1,38 @@
+{
+  "name": "hedgehog",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "subgraph"
+  ],
+  "scripts": {
+    "install:all": "npm install && npm install --workspace=frontend && npm install --workspace=subgraph",
+    
+    "dev": "concurrently \"npm run dev --workspace=frontend\" \"npm run build:watch --workspace=subgraph\"",
+    "build": "npm run build --workspace=frontend && npm run build --workspace=subgraph",
+    "lint": "npm run lint --workspace=frontend",
+    "preview": "npm run preview --workspace=frontend",
+    
+    "subgraph:codegen": "npm run codegen --workspace=subgraph",
+    "subgraph:build": "npm run build --workspace=subgraph",
+    "subgraph:deploy": "npm run deploy --workspace=subgraph",
+    "subgraph:dev": "npm run dev --workspace=subgraph",
+    
+    "frontend:dev": "npm run dev --workspace=frontend",
+    "frontend:build": "npm run build --workspace=frontend",
+    "frontend:preview": "npm run preview --workspace=frontend",
+    
+    "setup": "npm run install:all && npm run subgraph:codegen",
+    "deploy:all": "npm run build --workspace=frontend && npm run deploy --workspace=subgraph",
+    
+    "clean": "rm -rf node_modules frontend/node_modules subgraph/node_modules frontend/dist subgraph/build subgraph/generated"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  }
+}

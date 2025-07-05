@@ -1,0 +1,15 @@
+/* Styles spécifiques pour la modale RainbowKit */
+.rk-modal-container,
+[data-rk="modal-container"],
+div[role="dialog"] {
+  background-color: rgba(0, 0, 0, 0.75) !important;
+  backdrop-filter: blur(5px) !important;
+}
+
+.rk-modal,
+[data-rk="modal"],
+div[role="dialog"] > div {
+  background-color: #0a1929 !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important;
+}

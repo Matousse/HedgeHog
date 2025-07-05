@@ -60,7 +60,7 @@ const DeFiPutOptionForm: React.FC = () => {
   if (!mounted) return null;
 
   return (
-    <div className="min-h-screen bg-transparent flex items-center justify-center w-full" style={{ paddingTop: '120px', paddingBottom: '80px' }}>
+    <div className="min-h-screen bg-transparent flex items-center justify-center w-full" style={{ paddingTop: '120px', paddingBottom: '20px' }}>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -69,9 +69,9 @@ const DeFiPutOptionForm: React.FC = () => {
         style={{ minHeight: '500px', flexShrink: 0, padding: '24px' }}
       >
         <div
-          className="rounded-lg shadow-2xl relative overflow-hidden backdrop-blur-xl border-0 bg-white/30 dark:bg-slate-800/50"
+          className="rounded-lg shadow-2xl relative overflow-hidden border-0 bg-black"
           style={{ 
-            background: 'linear-gradient(135deg, rgba(34,211,238,0.12) 0%, rgba(59,130,246,0.12) 50%, rgba(168,85,247,0.12) 100%)',
+            background: '#000',
             minWidth: '500px',
             margin: '40px 0',
             padding: '24px'
@@ -86,7 +86,7 @@ const DeFiPutOptionForm: React.FC = () => {
           >
               <h1 className="text-3xl font-bold mb-2">
                 Create a{' '}
-                <span className="text-purple-600 font-bold">
+                <span className="text-slate-500 font-bold">
                   Put
                 </span>
                 {' '}Option
@@ -99,6 +99,7 @@ const DeFiPutOptionForm: React.FC = () => {
             <div className="h-8"></div>
 
             <form onSubmit={handleSubmit} className="space-y-16 flex flex-col gap-12">
+
               {/* Asset Address */}
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
@@ -107,7 +108,7 @@ const DeFiPutOptionForm: React.FC = () => {
                 className="space-y-6"
               >
                 <Label htmlFor="assetAddress" className="flex items-center gap-2 text-sm font-medium">
-                  <Wallet className="h-4 w-4 text-cyan-500" />
+                  <Wallet className="h-4 w-4 text-slate-500" />
                   Asset Address
                 </Label>
                 <Input
@@ -116,7 +117,7 @@ const DeFiPutOptionForm: React.FC = () => {
                   value={formData.assetAddress}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange('assetAddress', e.target.value)}
                   placeholder="0x..."
-                  className="bg-white/50 dark:bg-slate-700/50 border-cyan-200 dark:border-cyan-700 focus:border-cyan-500 focus:ring-cyan-500/20 transition-all duration-300"
+                  className="bg-white/50 dark:bg-slate-700/50 border-slate-200 dark:border-slate-700 focus:border-slate-500 focus:ring-slate-500/20 transition-all duration-300"
                   required
                 />
               </motion.div>
@@ -130,7 +131,7 @@ const DeFiPutOptionForm: React.FC = () => {
                   className="space-y-6"
                 >
                   <Label htmlFor="amount" className="flex items-center gap-2 text-sm font-medium">
-                    <TrendingUp className="h-4 w-4 text-blue-500" />
+                    <TrendingUp className="h-4 w-4 text-slate-500" />
                     Amount
                   </Label>
                   <Input
@@ -139,7 +140,7 @@ const DeFiPutOptionForm: React.FC = () => {
                     value={formData.amount}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange('amount', e.target.value)}
                     placeholder="100"
-                    className="bg-white/50 dark:bg-slate-700/50 border-blue-200 dark:border-blue-700 focus:border-blue-500 focus:ring-blue-500/20 transition-all duration-300"
+                    className="bg-white/50 dark:bg-slate-700/50 border-slate-200 dark:border-slate-700 focus:border-slate-500 focus:ring-slate-500/20 transition-all duration-300"
                     required
                   />
                 </motion.div>
@@ -151,8 +152,8 @@ const DeFiPutOptionForm: React.FC = () => {
                   className="space-y-6"
                 >
                   <Label htmlFor="strikePrice" className="flex items-center gap-2 text-sm font-medium">
-                    <DollarSign className="h-4 w-4 text-purple-500" />
-                    Strike Price
+                    <DollarSign className="h-4 w-4 text-slate-500" />
+                    Strike Price (USD)
                   </Label>
                   <Input
                     id="strikePrice"
@@ -160,7 +161,7 @@ const DeFiPutOptionForm: React.FC = () => {
                     value={formData.strikePrice}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange('strikePrice', e.target.value)}
                     placeholder="2500"
-                    className="bg-white/50 dark:bg-slate-700/50 border-purple-200 dark:border-purple-700 focus:border-purple-500 focus:ring-purple-500/20 transition-all duration-300"
+                    className="bg-white/50 dark:bg-slate-700/50 border-slate-200 dark:border-slate-700 focus:border-slate-500 focus:ring-slate-500/20 transition-all duration-300"
                     required
                   />
                 </motion.div>
@@ -175,8 +176,8 @@ const DeFiPutOptionForm: React.FC = () => {
                   className="space-y-6"
                 >
                   <Label htmlFor="premiumPrice" className="flex items-center gap-2 text-sm font-medium">
-                    <DollarSign className="h-4 w-4 text-cyan-500" />
-                    Premium Price
+                    <DollarSign className="h-4 w-4 text-slate-500" />
+                    Premium Price (USD)
                   </Label>
                   <Input
                     id="premiumPrice"
@@ -184,7 +185,7 @@ const DeFiPutOptionForm: React.FC = () => {
                     value={formData.premiumPrice}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange('premiumPrice', e.target.value)}
                     placeholder="50"
-                    className="bg-white/50 dark:bg-slate-700/50 border-cyan-200 dark:border-cyan-700 focus:border-cyan-500 focus:ring-cyan-500/20 transition-all duration-300"
+                    className="bg-white/50 dark:bg-slate-700/50 border-slate-200 dark:border-slate-700 focus:border-slate-500 focus:ring-slate-500/20 transition-all duration-300"
                     required
                   />
                 </motion.div>
@@ -196,7 +197,7 @@ const DeFiPutOptionForm: React.FC = () => {
                   className="space-y-6"
                 >
                   <Label htmlFor="expirationDate" className="flex items-center gap-2 text-sm font-medium">
-                    <Clock className="h-4 w-4 text-blue-500" />
+                    <Clock className="h-4 w-4 text-slate-500" />
                     Expiration Date
                   </Label>
                   <Input
@@ -204,7 +205,7 @@ const DeFiPutOptionForm: React.FC = () => {
                     type="date"
                     value={formData.expirationDate}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange('expirationDate', e.target.value)}
-                    className="bg-white/50 dark:bg-slate-700/50 border-blue-200 dark:border-blue-700 focus:border-blue-500 focus:ring-blue-500/20 transition-all duration-300"
+                    className="bg-white/50 dark:bg-slate-700/50 border-slate-200 dark:border-slate-700 focus:border-slate-500 focus:ring-slate-500/20 transition-all duration-300"
                     required
                   />
                 </motion.div>
@@ -215,13 +216,14 @@ const DeFiPutOptionForm: React.FC = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6, duration: 0.6 }}
-                className="pt-8"
+                className="pt-8 w-full mb-6"
               >
-                <Button
-                  type="submit"
-                  disabled={isLoading}
-                  className="w-full bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-600 hover:from-cyan-600 hover:via-blue-700 hover:to-purple-700 text-white font-semibold py-12 px-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none text-lg"
-                >
+                <div className="flex flex-col md:flex-row gap-6 w-full">
+                  <Button
+                    type="submit"
+                    disabled={isLoading}
+                    className="w-full bg-slate-800 hover:bg-slate-700 text-white font-semibold py-12 px-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none text-lg"
+                  >
                   {isLoading ? (
                     <div className="flex items-center justify-center gap-2">
                       <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
@@ -234,6 +236,7 @@ const DeFiPutOptionForm: React.FC = () => {
                     </div>
                   )}
                 </Button>
+                </div>
               </motion.div>
             </form>
 
@@ -242,7 +245,7 @@ const DeFiPutOptionForm: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7, duration: 0.6 }}
-              className="mt-10 p-6 bg-gradient-to-r from-cyan-50 via-blue-50 to-purple-50 dark:from-cyan-900/20 dark:via-blue-900/20 dark:to-purple-900/20 rounded-lg border border-cyan-200/50 dark:border-cyan-700/50"
+              className="mt-10 p-6 bg-slate-100 dark:bg-slate-800/30 rounded-lg border border-slate-200/50 dark:border-slate-700/50"
             >
               <p className="text-sm text-muted-foreground text-center">
                 💡 A put option gives you the right to sell an asset at a specified price before the expiration date.

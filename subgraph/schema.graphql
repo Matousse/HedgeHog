@@ -1,0 +1,29 @@
+type Option @entity {
+  id: ID!
+  optionId: BigInt!
+  creator: User!
+  strike: BigInt!
+  expiration: BigInt!
+  premium: BigInt!
+  isCall: Boolean!
+  underlying: String!
+  isActive: Boolean!
+  exercisedAt: BigInt
+  createdAt: BigInt!
+  transaction: Bytes!
+}
+
+type User @entity {
+  id: ID! # Adresse Ethereum
+  optionsCreated: [Option!]! @derivedFrom(field: "creator")
+  totalOptionsCreated: BigInt!
+  totalPremiumEarned: BigInt!
+}
+
+type OptionsDayData @entity {
+  id: ID! # timestamp / 86400
+  date: Int!
+  dailyVolumeUSD: BigDecimal!
+  dailyOptionsCreated: BigInt!
+  totalOptionsActive: BigInt!
+}

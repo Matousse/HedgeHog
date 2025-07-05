@@ -1,16 +1,11 @@
 /* Override RainbowKit button styles to make it completely transparent */
 :root {
-  --rk-colors-accentColor: transparent !important;
-  --rk-colors-accentColorForeground: white !important;
-  --rk-colors-actionButtonBorder: transparent !important;
-  --rk-colors-actionButtonBorderMobile: transparent !important;
-  --rk-colors-actionButtonSecondaryBackground: transparent !important;
+  /* Bouton transparent */
   --rk-colors-connectButtonBackground: transparent !important;
   --rk-colors-connectButtonBackgroundError: transparent !important;
   --rk-colors-connectButtonInnerBackground: transparent !important;
   --rk-colors-connectButtonText: white !important;
   --rk-colors-connectButtonTextError: white !important;
-  --rk-colors-modalBackground: #0a1929 !important;
 }
 
 /* Force all connect buttons to be transparent */
