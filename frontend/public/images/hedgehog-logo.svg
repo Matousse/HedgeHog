@@ -1,0 +1,32 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00BCD4" />
+      <stop offset="50%" stop-color="#4169E1" />
+      <stop offset="100%" stop-color="#9C27B0" />
+    </linearGradient>
+  </defs>
+  <circle cx="100" cy="100" r="90" fill="url(#gradient)" opacity="0.1" />
+  <path d="M155 100C155 130.376 130.376 155 100 155C69.6243 155 45 130.376 45 100C45 69.6243 69.6243 45 100 45C130.376 45 155 69.6243 155 100Z" stroke="url(#gradient)" stroke-width="6" />
+  
+  <!-- Hedgehog Body -->
+  <ellipse cx="100" cy="110" rx="40" ry="35" fill="url(#gradient)" />
+  
+  <!-- Spikes -->
+  <path d="M60 110L50 90M70 85L55 65M85 80L75 55M100 75L100 50M115 80L125 55M130 85L145 65M140 110L150 90" stroke="url(#gradient)" stroke-width="4" stroke-linecap="round" />
+  
+  <!-- Face -->
+  <circle cx="85" cy="105" r="5" fill="white" />
+  <circle cx="115" cy="105" r="5" fill="white" />
+  <circle cx="83" cy="103" r="2" fill="#000" />
+  <circle cx="113" cy="103" r="2" fill="#000" />
+  
+  <!-- Nose -->
+  <ellipse cx="100" cy="115" rx="8" ry="5" fill="#333" />
+  
+  <!-- Mouth -->
+  <path d="M90 125C93.3333 128.333 106.6 128.333 110 125" stroke="#333" stroke-width="2" stroke-linecap="round" />
+  
+  <!-- Text -->
+  <text x="100" y="175" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="url(#gradient)" text-anchor="middle">HEDGEHOG</text>
+</svg>
