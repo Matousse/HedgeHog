@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @import './header.css';
+@import './rainbow-override.css';
 
 /* Animations */
 @keyframes gradient-border {

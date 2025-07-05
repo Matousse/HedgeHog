@@ -2,22 +2,17 @@
 
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Menu, X, TrendingUp, Wallet } from 'lucide-react'
+import { Menu, X, TrendingUp } from 'lucide-react'
 import { Button } from '../ui/button'
 import '../../styles/header.css'
 import type { CSSProperties } from 'react';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 interface HeaderProps {
-  onConnectWallet?: () => void
-  isWalletConnected?: boolean
-  walletAddress?: string
   style?: CSSProperties;
 }
 
 const Header: React.FC<HeaderProps> = ({
-  onConnectWallet,
-  isWalletConnected,
-  walletAddress,
   style
 }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -27,10 +22,7 @@ const Header: React.FC<HeaderProps> = ({
     { label: 'Analytics', href: '#analytics', icon: TrendingUp }
   ]
 
-  const formatWalletAddress = (address: string) => {
-    if (!address) return ''
-    return `${address.slice(0, 6)}...${address.slice(-4)}`
-  }
+
 
   return (
     <motion.header
@@ -60,64 +52,115 @@ const Header: React.FC<HeaderProps> = ({
               />
 
             </div>
-            <span className="text-xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-600 bg-clip-text text-transparent">
+            <span className="text-xl font-bold text-white">
               HedgeHog
             </span>
           </motion.div>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center justify-center gap-24 w-full">
-            {navigationItems.map((item, index) => (
-              <motion.a
-                key={item.label}
-                href={item.href}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 + 0.3 }}
-                whileHover={{ scale: 1.05, y: -5 }}
-                className="flex items-center px-3 py-2 text-white hover:text-cyan-300 transition-all duration-200 font-bold tracking-wide text-lg"
-                style={{color: '#ffffff'}}
-              >
-                <item.icon className="w-5 h-5" style={{marginRight: '12px'}} />
-                <span>{item.label}</span>
-              </motion.a>
-            ))}
-          </nav>
+          <div className="flex items-center justify-center w-full">
+            {/* Desktop Navigation */}
+            <nav className="hidden md:flex items-center justify-center gap-24 flex-1">
+              {navigationItems.map((item, index) => (
+                <motion.a
+                  key={item.label}
+                  href={item.href}
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 + 0.3 }}
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  className="flex items-center px-3 py-2 text-white hover:text-cyan-300 transition-all duration-200 font-bold tracking-wide text-lg"
+                  style={{color: '#ffffff'}}
+                >
+                  <item.icon className="w-5 h-5" style={{marginRight: '12px'}} />
+                  <span>{item.label}</span>
+                </motion.a>
+              ))}
+            </nav>
 
-          {/* Wallet Connection */}
-          <div className="flex items-center space-x-4">
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.5 }}
-            >
-              {isWalletConnected ? (
-                <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  className="flex items-center space-x-3 px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-violet-500/10 border border-gradient-to-r border-cyan-500/20"
-                >
-                  <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-                  <span className="text-sm font-medium text-foreground">
-                    {formatWalletAddress(walletAddress || '0x1234...5678')}
-                  </span>
-                </motion.div>
-              ) : (
-                <Button
-                  onClick={onConnectWallet}
-                  className="relative overflow-hidden bg-gradient-to-r from-cyan-500 via-blue-600 to-violet-600 hover:from-cyan-600 hover:via-blue-700 hover:to-violet-700 text-white border-0 px-6 py-2 rounded-xl font-medium transition-all duration-300"
-                >
-                  <motion.div
-                    whileHover={{ x: 2 }}
-                    className="flex items-center whitespace-nowrap"
-                    style={{ gap: '12px', padding: '0 10px' }}
-                  >
-                    <Wallet className="w-5 h-5" />
-                    <span className="text-lg" style={{ margin: '0 6px' }}>Connect Wallet</span>
-                  </motion.div>
-                  <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 opacity-0 hover:opacity-20 transition-opacity duration-300" />
-                </Button>
-              )}
-            </motion.div>
+            {/* Wallet Connection */}
+            <div className="flex items-center space-x-4 ml-auto">
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.5 }}
+              >
+                <ConnectButton.Custom>
+                  {({
+                    account,
+                    chain,
+                    openAccountModal,
+                    openChainModal,
+                    openConnectModal,
+                    mounted,
+                  }) => {
+                    const ready = mounted;
+                    const connected = ready && account && chain;
+
+                    return (
+                      <div
+                        {...(!ready && {
+                          'aria-hidden': true,
+                          style: {
+                            opacity: 0,
+                            pointerEvents: 'none',
+                            userSelect: 'none',
+                          },
+                        })}
+                      >
+                        {(() => {
+                          if (!connected) {
+                            return (
+                              <Button
+                                onClick={openConnectModal}
+                                className="relative overflow-hidden bg-transparent text-white border-0 px-6 py-2 rounded-xl font-medium transition-all duration-300"
+                                style={{ background: 'transparent !important', backgroundColor: 'transparent !important', border: 'none !important', boxShadow: 'none !important' }}
+                              >
+                                <motion.div
+                                  whileHover={{ x: 2 }}
+                                  className="flex items-center whitespace-nowrap"
+                                  style={{ gap: '12px', padding: '0 10px' }}
+                                >
+                                  <span className="text-lg" style={{ margin: '0 6px' }}>Connect Wallet</span>
+                                </motion.div>
+                              </Button>
+                            );
+                          }
+
+                          if (chain.unsupported) {
+                            return (
+                              <Button onClick={openChainModal} className="bg-red-500 text-white px-4 py-2 rounded-xl">
+                                Wrong network
+                              </Button>
+                            );
+                          }
+
+                          return (
+                            <div className="flex items-center gap-3">
+                              <Button
+                                onClick={openChainModal}
+                                className="flex items-center space-x-2 bg-transparent border border-white/20 hover:border-white/40 px-3 py-1.5 rounded-xl"
+                              >
+                                <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+                                <span>{chain.name}</span>
+                              </Button>
+
+                              <Button
+                                onClick={openAccountModal}
+                                className="flex items-center space-x-3 px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-violet-500/10 border border-gradient-to-r border-cyan-500/20"
+                              >
+                                <span className="text-sm font-medium text-foreground">
+                                  {account.displayName}
+                                </span>
+                              </Button>
+                            </div>
+                          );
+                        })()}
+                      </div>
+                    );
+                  }}
+                </ConnectButton.Custom>
+              </motion.div>
+            </div>
 
             {/* Mobile Menu Button */}
             <Button

@@ -48,7 +48,6 @@ const mockOptions: Option[] = [
 ];
 
 export default function Home() {
-  const [isWalletConnected, setIsWalletConnected] = useState(false); // Default to not connected
   const [options, setOptions] = useState<Option[]>(mockOptions);
   
   // Filtrer les options pour les différents onglets
@@ -81,14 +80,20 @@ export default function Home() {
   };
   
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cyan-900 via-blue-900 to-purple-900 text-white">
+    <div 
+      className="min-h-screen text-white relative" 
+      style={{ 
+        backgroundColor: '#0a1929', 
+        backgroundImage: 'url(/src/assets/logo.png)', 
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+        backgroundSize: '60%',
+        backgroundBlendMode: 'overlay',
+        backgroundAttachment: 'fixed',
+        opacity: 0.8
+      }}
+    >
       <Header 
-        isWalletConnected={isWalletConnected} 
-        onConnectWallet={() => {
-          console.log('Connecting wallet...');
-          setIsWalletConnected(true);
-        }}
-        walletAddress={isWalletConnected ? '0xYOUR_WALLET_ADDRESS' : ''}
         style={{ backgroundColor: '#000', position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50 }}
       />
       
@@ -112,7 +117,7 @@ export default function Home() {
               <TabsList className="inline-flex bg-slate-800/50 backdrop-blur-md p-1.5 rounded-xl shadow-lg border border-white/10" aria-label="Options Navigation">
                 <TabsTrigger 
                   value="available" 
-                  className="px-8 py-3 rounded-lg text-lg font-medium transition-all duration-300 ease-in-out data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-500 data-[state=active]:to-blue-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=inactive]:text-gray-300 data-[state=inactive]:hover:text-white focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 focus:ring-offset-slate-800"
+                  className="px-12 py-4 rounded-lg text-lg font-medium transition-all duration-300 ease-in-out data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-500 data-[state=active]:to-blue-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=inactive]:text-gray-300 data-[state=inactive]:hover:text-white focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 focus:ring-offset-slate-800"
                   aria-controls="available-options-panel"
                 >
                   <span className="flex items-center gap-2">
@@ -122,7 +127,7 @@ export default function Home() {
                 </TabsTrigger>
                 <TabsTrigger 
                   value="user" 
-                  className="px-8 py-3 rounded-lg text-lg font-medium transition-all duration-300 ease-in-out data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-600 data-[state=active]:to-purple-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=inactive]:text-gray-300 data-[state=inactive]:hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-slate-800"
+                  className="px-12 py-4 rounded-lg text-lg font-medium transition-all duration-300 ease-in-out data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-600 data-[state=active]:to-purple-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=inactive]:text-gray-300 data-[state=inactive]:hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-slate-800"
                   aria-controls="user-options-panel"
                 >
                   <span className="flex items-center gap-2">

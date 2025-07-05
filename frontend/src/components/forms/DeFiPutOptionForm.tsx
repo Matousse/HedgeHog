@@ -96,6 +96,8 @@ const DeFiPutOptionForm: React.FC = () => {
               </p>
             </motion.div>
 
+            <div className="h-8"></div>
+
             <form onSubmit={handleSubmit} className="space-y-16 flex flex-col gap-12">
               {/* Asset Address */}
               <motion.div
