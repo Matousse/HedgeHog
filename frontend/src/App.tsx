@@ -1,37 +1,59 @@
-import { createConfig, http, WagmiProvider } from 'wagmi';
+import { WagmiProvider, createConfig, http } from 'wagmi';
 import { mainnet, sepolia } from 'wagmi/chains';
+import { defineChain } from 'viem';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ConnectKitProvider, getDefaultConfig } from 'connectkit';
+import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
+import '@rainbow-me/rainbowkit/styles.css';
 import Home from './pages/index';
 
 // Configurer le client React Query
-const queryClient = new QueryClient();
-
-// Configurer wagmi avec connectkit
-const config = createConfig(
-  getDefaultConfig({
-    // ID de votre projet Infura ou Alchemy
-    appName: 'HedgeHog',
-    // Vous pouvez ajouter votre clé API ici
-    // infuraId: process.env.INFURA_ID,
-    // alchemyId: process.env.ALCHEMY_ID,
-    // Utiliser un ID temporaire pour le développement
-    walletConnectProjectId: 'temporary-project-id-for-development',
-    chains: [mainnet, sepolia],
-    transports: {
-      [mainnet.id]: http(),
-      [sepolia.id]: http(),
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
     },
-  }),
-);
+  },
+});
+
+// Définir Flow EVM comme chaîne personnalisée
+const flowEVM = defineChain({
+  id: 747,
+  name: 'Flow EVM',
+  nativeCurrency: {
+    decimals: 18,
+    name: 'Flow',
+    symbol: 'FLOW',
+  },
+  rpcUrls: {
+    default: {
+      http: ['https://mainnet.evm.nodes.onflow.org'],
+    },
+  },
+  blockExplorers: {
+    default: {
+      name: 'Flow EVM Explorer',
+      url: 'https://evm.flowscan.io',
+    },
+  },
+});
+
+// Configuration wagmi avec RainbowKit (sans WalletConnect)
+const config = createConfig({
+  chains: [mainnet, sepolia, flowEVM],
+  transports: {
+    [mainnet.id]: http(),
+    [sepolia.id]: http(),
+    [flowEVM.id]: http('https://mainnet.evm.nodes.onflow.org'),
+  },
+});
 
 function App() {
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        <ConnectKitProvider>
+        <RainbowKitProvider>
           <Home />
-        </ConnectKitProvider>
+        </RainbowKitProvider>
       </QueryClientProvider>
     </WagmiProvider>
   );
